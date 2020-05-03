@@ -67,7 +67,11 @@ public class NotificationUtils {
     public static void remindUserBecauseCharging(Context context) {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Since the launch of Android Oreo, you're not allowed to display any notification without it belonging to a specific notification channel.
+        // So if you're app supports Oreo version, then you must add a notification channel for it
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Setting the Importance level to HIGH, will force this notification to popup on the device using the Heads-Up display
             NotificationChannel mChannel = new NotificationChannel(
                     WATER_REMINDER_NOTIFICATION_CHANNEL_ID,
                     context.getString(R.string.main_notification_channel_name),
